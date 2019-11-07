@@ -9,27 +9,40 @@
 <div id="app">
     <div class="home">
         <div class="grid">
-            <div class="wrapper" :style="style">
+            <div class="wrapper" @click="openDetailModal"  :style="style">
                 <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
+                <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
             </div>
-            <div class="wrapper" :style="style">
+            <div class="wrapper" @click="openDetailModal" :style="style">
                 <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
+                <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
             </div>
-            <div class="wrapper" :style="style">
+            <div class="wrapper" @click="openDetailModal" :style="style">
                 <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
+                <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
             </div>
-            <div class="wrapper">
+            <div class="wrapper" @click="openDetailModal">
                 <div class="add">+</div>
             </div>
         </div>
-        <div v-if="addModal" class="modal">ADD CARS
-          <div class="close" @click="closeAddModal"/>
-        </div>
-        <div v-if="carModal" class="modal">SHOW DETAILS
-            <div class="close" @click="closeCarModal"/>
+        <div v-if="detailModal" class="modal">
+            <div class="right-side">
+                <h1 class="car-modal-title">{{car.manufacturer}} {{car.model}} {{car.year}}</h1>
+                <img class="modal-image" src="./assets/mazda.png">
+                <form>
+                    <label for="carTiming">Aktualny przebieg</label>
+                    <input type="text" class="car-timing" id="carTiming">
+                    <button @click="save">Zapisz</button>
+                </form>
+            </div>
+            <div class="left-side">
+                <h3 class="used-title">Zużute elementy</h3>
+                <div v-for="element in car.elements" class="used-element">
+                    <p>{{element.name}} - zużyto po {{element.value}}km</p>
+                    <span>&#10003;</span>
+                </div>
+            </div>
+            <div class="close" @click="closeDetailModal"/>
         </div>
     </div>
 </div>
@@ -42,10 +55,21 @@
             car: {
                 manufacturer: 'Mazda',
                 model: 'RX8',
+                year: 2000,
+                elements: [
+                    {
+                        name: "Silnik",
+                        value: 30000,
+                    },
+                    {
+                        name: "Koła",
+                        value: 40000
+                    }
+                ]
             },
             errors: [],
             addModal: false,
-            carModal: false,
+            detailModal: false,
         },
         computed: {
             logo() {
@@ -63,18 +87,14 @@
         watch: {
         },
         methods: {
-            showAddModal(event) {
-                this.addModal = true;
+            openDetailModal(event) {
+                this.detailModal = true;
             },
-            showCarModal(event) {
-                this.carModal = true;
-                console.log(this.carModal);
+            closeDetailModal() {
+                this.detailModal = false;
             },
-            closeAddModal() {
-                this.addModal = false;
-            },
-            closeCarModal() {
-                this.carModal = false;
+            save() {
+                alert('save');
             }
         }
     })
