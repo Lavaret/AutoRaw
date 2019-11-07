@@ -25,8 +25,15 @@
                 <div class="add">+</div>
             </div>
         </div>
+        <div v-if="addModal" class="modal">ADD CARS
+          <div class="close" @click="closeAddModal"/>
+        </div>
+        <div v-if="carModal" class="modal">SHOW DETAILS
+            <div class="close" @click="closeCarModal"/>
+        </div>
     </div>
 </div>
+
 
 <script>
     var app = new Vue({
@@ -37,6 +44,8 @@
                 model: 'RX8',
             },
             errors: [],
+            addModal: false,
+            carModal: false,
         },
         computed: {
             logo() {
@@ -54,6 +63,19 @@
         watch: {
         },
         methods: {
+            showAddModal(event) {
+                this.addModal = true;
+            },
+            showCarModal(event) {
+                this.carModal = true;
+                console.log(this.carModal);
+            },
+            closeAddModal() {
+                this.addModal = false;
+            },
+            closeCarModal() {
+                this.carModal = false;
+            }
         }
     })
 </script>
