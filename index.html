@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div id="app" class="home">
+    <div class="grid">
+        <div class="car-wrapper" @click="showCarModal" v-for="car in cars" :key="car.id">
+            <img class="car-logo" :src="car.image" :alt="car.manufacturer"/>
+            <div class="model">{{car.manufacturer}} {{car.model}}</div>
+        </div>
+        <div class="empty" @click="showAddModal">
+            <div class="add">+</div>
+        </div>
+    </div>
+    <div v-if="addModal" class="modal">ADD CARS
+        <div class="close" @click="closeAddModal"/>
+    </div>
+    <div v-if="carModal" class="modal">SHOW DETAILS
+        <div class="close" @click="closeCarModal"/>
+    </div>
+</div>
+
+<script src="./assets/cars.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            title: "Opel",
+            cars: cars,
+            addModal: false,
+            carModal: false,
+        },
+        methods: {
+            showAddModal(event) {
+                this.addModal = true;
+            },
+            showCarModal(event) {
+                this.carModal = true;
+                console.log(this.carModal);
+            },
+            closeAddModal() {
+                this.addModal = false;
+            },
+            closeCarModal() {
+                this.carModal = false;
+            }
+        }
+    })
+</script>

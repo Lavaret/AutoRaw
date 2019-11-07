@@ -1,0 +1,111 @@
+.home {
+  margin-top: 30px;
+  min-height: 70vh;
+  display: flex;
+  justify-content: space-around;
+}
+.grid {
+  width: 60vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-evenly;
+}
+.empty {
+  width: 250px;
+  height: 250px;
+  transition: .5s ease;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.empty:hover {
+  -moz-box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.empty:hover .add {
+  opacity: 0.7;
+}
+
+.add {
+  font-size: 50px;
+  transition: .5s ease;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  opacity: .3;
+}
+
+.car-wrapper {
+  top: 0;
+  width: 250px;
+  height: 250px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #ffaabb;
+  transition: .5s ease;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.car-wrapper:hover {
+  -moz-box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.car-wrapper:hover .car-logo {
+  background-color: #fff;
+  opacity: 1;
+}
+
+.car-wrapper:hover .model {
+  opacity: .7;
+}
+
+.modal {
+  position: fixed;
+  width: 70vw;
+  height: 50vh;
+  top: 150px;
+  margin: auto;
+  background-color: #eee;
+  -moz-box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 33px -2px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.3);
+}
+
+.close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.close::before, .close::after {
+  position: absolute;
+  content: '';
+  top: 30px;
+  right: 20px;
+  width: 20px;
+  height: 2px;
+  background: black;
+  display: block;
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}
