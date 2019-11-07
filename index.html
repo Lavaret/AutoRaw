@@ -6,61 +6,33 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="app">
-    <div class="home">
-        <div class="grid">
-            <div class="wrapper" :style="style">
-                <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
-            </div>
-            <div class="wrapper" :style="style">
-                <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
-            </div>
-            <div class="wrapper" :style="style">
-                <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
-                <div class="model">{{car.manufacturer}} {{car.model}}</div>
-            </div>
-            <div class="wrapper">
-                <div class="add">+</div>
-            </div>
+<div id="app" class="home">
+    <div class="grid">
+        <div class="car-wrapper" @click="showCarModal" v-for="car in cars" :key="car.id">
+            <img class="car-logo" :src="car.image" :alt="car.manufacturer"/>
+            <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
         </div>
-        <div v-if="addModal" class="modal">ADD CARS
-          <div class="close" @click="closeAddModal"/>
+        <div class="empty" @click="showAddModal">
+            <div class="add">+</div>
         </div>
-        <div v-if="carModal" class="modal">SHOW DETAILS
-            <div class="close" @click="closeCarModal"/>
-        </div>
+    </div>
+    <div v-if="addModal" class="modal">ADD CARS
+        <div class="close" @click="closeAddModal"/>
+    </div>
+    <div v-if="carModal" class="modal">SHOW DETAILS
+        <div class="close" @click="closeCarModal"/>
     </div>
 </div>
 
-
+<script src="./assets/cars.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            car: {
-                manufacturer: 'Mazda',
-                model: 'RX8',
-            },
-            errors: [],
+            title: "Opel",
+            cars: cars,
             addModal: false,
             carModal: false,
-        },
-        computed: {
-            logo() {
-                // const images = require.context('../assets/logos', false, /\.png$/);
-                // return images(`./${this.car.manufacturer.toLowerCase()}.png`);
-            },
-            style() {
-                // const images = require.context('../assets', false, /\.png$/);
-                // const url = images(`./${this.car.image}`);
-                // console.log(images, url);
-                // return `backgroundImage: url("${url}")`;
-                return `backgroundImage: url(./assets/mazda.png)`;
-            },
-        },
-        watch: {
         },
         methods: {
             showAddModal(event) {
@@ -79,5 +51,3 @@
         }
     })
 </script>
-</body>
-</html>
