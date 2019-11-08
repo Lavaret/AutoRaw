@@ -6,14 +6,34 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="app" class="home">
-    <div class="grid">
-        <div class="car-wrapper" @click="showCarModal" v-for="car in cars" :key="car.id">
-            <img class="car-logo" :src="car.image" :alt="car.manufacturer"/>
-            <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
+<div id="app">
+    <div class="home">
+        <div class="grid">
+            <div class="wrapper" @click="openDetailModal(car)"  :style="style" v-for="car in cars">
+                <img class="car-logo" :src="logo" :alt="car.manufacturer"/>
+                <div class="car-model">{{car.manufacturer}} {{car.model}}</div>
+            </div>
+            <div class="wrapper" @click="openDetailModal">
+                <div class="add">+</div>
+            </div>
         </div>
-        <div class="empty" @click="showAddModal">
-            <div class="add">+</div>
+        <div v-if="detailModal" class="modal">
+            <div class="right-side">
+                <h1 class="car-modal-title">{{viewCar.manufacturer}} {{viewCar.model}} {{viewCar.year}}</h1>
+                <img class="modal-image" src="./assets/mazda.png">
+                <form>
+                    <label for="carTiming">Aktualny przebieg</label>
+                    <input v-model="viewCar.actualCarTiming" type="number" class="car-timing" id="carTiming">
+                    <button @click="save">Zapisz</button>
+                </form>
+            </div>
+            <div class="left-side">
+                <h3 class="used-title">Elementy</h3>
+                <div v-for="element in viewCar.elements" class="car-element" :class="checkClassUsage(element.value)">
+                    <p class="title">{{element.name}} : {{element.value}}km</p><p class="fix"></p>
+                </div>
+            </div>
+            <div class="close" @click="closeDetailModal"/>
         </div>
     </div>
     <div v-if="addModal" class="modal">ADD CARS
@@ -29,25 +49,89 @@
     var app = new Vue({
         el: '#app',
         data: {
-            title: "Opel",
-            cars: cars,
+            cars: [
+                {
+                    manufacturer: 'Mazda',
+                    model: 'RX8',
+                    year: 2000,
+                    actualCarTiming: 30001,
+                    elements: [
+                        {
+                            name: "Silnik",
+                            value: 30000,
+                        },
+                        {
+                            name: "Koła",
+                            value: 40000
+                        }
+                    ]
+                },
+                {
+                    manufacturer: 'Kia',
+                    model: 'Vemga',
+                    year: 2000,
+                    actualCarTiming: 5000,
+                    elements: [
+                        {
+                            name: "Silnik",
+                            value: 30000,
+                        },
+                        {
+                            name: 'Wycieraczki',
+                            value: 6000
+                        },
+                        {
+                            name: "Koła",
+                            value: 5000
+                        }
+                    ]
+                }
+            ],
+            errors: [],
             addModal: false,
-            carModal: false,
+            detailModal: false,
+            viewCar: null
+        },
+        computed: {
+            logo() {
+                // const images = require.context('../assets/logos', false, /\.png$/);
+                // return images(`./${this.car.manufacturer.toLowerCase()}.png`);
+            },
+            style() {
+                // const images = require.context('../assets', false, /\.png$/);
+                // const url = images(`./${this.car.image}`);
+                // console.log(images, url);
+                // return `backgroundImage: url("${url}")`;
+                return `backgroundImage: url(./assets/mazda.png)`;
+            }
+        },
+        watch: {
         },
         methods: {
-            showAddModal(event) {
-                this.addModal = true;
+            openDetailModal(car) {
+                if (!car) {
+                    //
+                }
+                car.elements.sort((a, b) => {
+                    return a.value - b.value;
+                });
+                this.viewCar = car;
+                this.detailModal = true;
             },
-            showCarModal(event) {
-                this.carModal = true;
-                console.log(this.carModal);
+            closeDetailModal() {
+                this.detailModal = false;
+                this.viewCar = null;
             },
-            closeAddModal() {
-                this.addModal = false;
+            save() {
+                alert('save');
             },
-            closeCarModal() {
-                this.carModal = false;
-            }
+            checkClassUsage(value) {
+                const timing = this.viewCar.actualCarTiming;
+                return {
+                    'used' : value <= timing,
+                    'almost' : value > timing && value - timing < 1000,
+                };
+            },
         }
     })
 </script>
