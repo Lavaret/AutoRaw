@@ -79,6 +79,7 @@
     opacity: 0;
 }
 
+
 /******************Modal******************/
 .modal {
     position: fixed;
@@ -93,7 +94,6 @@
 }
 
 /*close element*/
-
 .close {
     position: absolute;
     width: 30px;
