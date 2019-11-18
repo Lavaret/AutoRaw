@@ -159,15 +159,21 @@ form input {
     font-size: 20px;
 }
 
-form button {
+form button.save {
     margin-top: 20px;
     width: 100%;
     padding: 15px;
-    background-color: #333;
+    background-color: rgba(50, 50, 50, 1);
     color: white;
     border-radius: 5px;
     display: inline;
     font-size: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+button.save:active {
+    background-color: rgba(50, 50, 50, 0.6);
 }
 
 /* left side */
@@ -204,12 +210,38 @@ div.car-element:hover {
     background-color: #91EA5E;
 }
 
-div.car-element:hover p.title {
+div.fix, div.unfix {
     display: none;
 }
 
-div.car-element:hover p.fix:after {
-    content: 'NAPRAW';
+div.car-element:hover div.unfix, div.car-element:hover div.fix {
+    display: block;
+}
+
+div.unfix, div.fix {
+    position: absolute;
+    padding: 5px;
+    font-size: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    top: 8px;
+    cursor: pointer;
+}
+
+div.car-element p.title {
+    margin-top: 12px;
+}
+
+div.unfix {
+    right: 15px;
+}
+
+div.fix {
+    right: 75px;
+}
+
+div.unfix:hover, div.fix:hover {
+    background-color: rgba(255, 255, 255, .3);
 }
 
 div.car-element:hover.almost {
