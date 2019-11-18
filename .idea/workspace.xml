@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea33f242-0b29-4dc0-8e0c-6f879c8c52c0" name="Default Changelist" comment="" />
+    <list default="true" id="ea33f242-0b29-4dc0-8e0c-6f879c8c52c0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +30,7 @@
   <component name="ProjectId" id="1TC8ZTGe4EzfShiiEvyvukI3ygh" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../react/ttt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -64,6 +68,8 @@
       <workItem from="1573135545451" duration="15000" />
       <workItem from="1573135561046" duration="1765000" />
       <workItem from="1573200989206" duration="7921000" />
+      <workItem from="1573540495403" duration="106000" />
+      <workItem from="1574073848900" duration="9450000" />
     </task>
     <servers />
   </component>

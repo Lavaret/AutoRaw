@@ -24,13 +24,15 @@
                 <form>
                     <label for="carTiming">Aktualny przebieg</label>
                     <input v-model="viewCar.actualCarTiming" type="number" class="car-timing" id="carTiming">
-                    <button @click="save">Zapisz</button>
+                    <button class="save" @click="save">Zapisz</button>
                 </form>
             </div>
             <div class="left-side">
                 <h3 class="used-title">Elementy</h3>
-                <div v-for="element in viewCar.elements" class="car-element" :class="checkClassUsage(element.value)">
-                    <p class="title">{{element.name}} : {{element.value}}km</p><p class="fix"></p>
+                <div v-for="element in viewCar.elements" class="car-element" :class="checkClassUsage(element.currentValue)">
+                    <p class="title">{{element.name}} : {{element.currentValue}}km</p>
+                    <div class="fix" @click="fixElement(element)">{{messages.fix}}</div>
+                    <div class="unfix" @click="unfixElement(element)">{{messages.back}}</div>
                 </div>
             </div>
             <div class="close" @click="closeDetailModal"/>
@@ -45,45 +47,59 @@
         data: {
             cars: [
                 {
+                    id: 1,
                     manufacturer: 'Mazda',
                     model: 'RX8',
                     year: 2000,
                     actualCarTiming: 30001,
                     elements: [
                         {
+                            id: 1,
                             name: "Silnik",
-                            value: 30000,
+                            currentValue: 30000,
+                            upValue: 3000,
                         },
                         {
+                            id: 2,
                             name: "Koła",
-                            value: 40000
+                            currentValue: 40000,
+                            upValue: 3000,
                         }
                     ]
                 },
                 {
+                    id: 2,
                     manufacturer: 'Kia',
                     model: 'Vemga',
                     year: 2000,
                     actualCarTiming: 5000,
                     elements: [
                         {
+                            id: 1,
                             name: "Silnik",
-                            value: 30000,
+                            currentValue: 30000,
+                            upValue: 3000,
                         },
                         {
+                            id: 2,
                             name: 'Wycieraczki',
-                            value: 6000
+                            currentValue: 6000,
+                            upValue: 3000,
                         },
                         {
+                            id: 3,
                             name: "Koła",
-                            value: 5000
+                            currentValue: 5000,
+                            upValue: 3000,
                         }
                     ]
                 }
             ],
+            fixed: false,
             errors: [],
             addModal: false,
             detailModal: false,
+            messages: {fix: 'NAPRAW', back: 'COFNIJ'},
             viewCar: null
         },
         computed: {
@@ -107,7 +123,7 @@
                     //
                 }
                 car.elements.sort((a, b) => {
-                    return a.value - b.value;
+                    return a.currentValue - b.currentValue;
                 });
                 this.viewCar = car;
                 this.detailModal = true;
@@ -119,13 +135,19 @@
             save() {
                 alert('save');
             },
-            checkClassUsage(value) {
+            checkClassUsage(currentValue) {
                 const timing = this.viewCar.actualCarTiming;
                 return {
-                    'used' : value <= timing,
-                    'almost' : value > timing && value - timing < 1000,
+                    'used' : currentValue <= timing,
+                    'almost' : currentValue > timing && currentValue - timing < 3000,
                 };
             },
+            fixElement(element) {
+                element.currentValue += element.upValue;
+            },
+            unfixElement(element) {
+                element.currentValue -= element.upValue;
+            }
         }
     })
 </script>
