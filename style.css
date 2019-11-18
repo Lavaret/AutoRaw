@@ -81,7 +81,7 @@
 
 
 /******************Modal******************/
-.modal {
+.detail-modal, .add-modal {
     position: fixed;
     width: 70vw;
     height: 50vh;
